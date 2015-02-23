@@ -670,7 +670,10 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     data = args.__dict__
-    func = data.pop('func')
+    func = data.pop('func', None)
+    if func is None:
+        parser.print_usage()
+        raise SystemExit(0)
     args.verbose and log("command '%s' ..." % func.__name__, "info")
 
     global g
